@@ -1,0 +1,48 @@
+version: "2"
+
+services:
+  api:
+    build:
+      context: src
+      dockerfile: ${APP_ENV}.dockerfile
+    environment:
+      - APP_ENV
+      - APP_URL
+      - APP_KEY
+      - DB_CONNECTION=mysql
+      - DB_PORT=3306
+      - DB_HOST=${MYSQL_HOST}
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+    working_dir: /var/www
+    expose:
+      - 9000
+    depends_on:
+      - database
+    links:
+      - database
+
+  web:
+    build:
+      context: nginx
+      dockerfile: ${APP_ENV}.dockerfile
+    working_dir: /var/www
+    expose:
+      - 8080
+    links:
+      - api
+
+  database:
+    build:
+      context: mysql
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_USER
+      - MYSQL_DATABASE
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+    expose:
+      - 3306
+    volumes:
+      - /opt/mysql.d/${APP_ENV}:/var/lib/mysql

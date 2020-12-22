@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+  api:
+    build:
+      args:
+        - USER_ID
+    volumes:
+      - ./src:/var/www
+
+  web:
+    build:
+      args:
+      - USER_ID
+    volumes:
+      - ./src:/var/www/api
+      - ./nginx/logs:/var/www/logs
+    ports:
+    - ${APP_PORT}:8080
+
+  database:
+    ports:
+    - ${DB_PORT}:3306

@@ -1,0 +1,13 @@
+###> docker
+/.env
+###< docker
+
+###> ide
+/.idea
+/.DS_Store
+<<<<<<< HEAD
+###< ide
+
+###> Dependency directories
+node_modules/
+###< Dependency directories
