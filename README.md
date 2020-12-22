@@ -26,6 +26,9 @@ Allows you to quick setup development environment
 
         # Set your host user id (Linux/MacOS)
         USER_ID=1000
+      
+        # Set a port where the app should be served on your localhost
+        APP_PORT=8080
         ###< docker/app ###
       
         ###> docker/mysql ###
@@ -46,11 +49,14 @@ Allows you to quick setup development environment
         ###< docker/mysql ###
       
         ###> docker/dev ###
-        # Set a port where the app should be served on your localhost
-        APP_PORT=8080
-
         # Set a port where the database should be served on your localhost
         DB_PORT=3310
+        
+        # Url of laravel application (from host perspective)
+        APP_URL=http://localhost:8080
+        
+        # Internal key, leave it as it is now
+        APP_KEY=base64:gbOgtVCImuK0fgJhG0VgI6mOFw09N3l06sPDoOTSO0I=
         ###< docker/dev ###
         ```
 
